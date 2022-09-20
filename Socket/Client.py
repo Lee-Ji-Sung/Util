@@ -1,16 +1,22 @@
 #####################################################################
-#   Test.py
-#       - This shows how to use 
+#   Fortmat.py
+#       - This shows how to use client by using python
 #           . description
 #   written by jslee
 #   date : 2000.00.00
 #####################################################################
 
 
-import numpy as np
 
 
+import socket
+
+    
 
 if __name__ == '__main__':
+    
+   
+    
+    
     
     print(f'Done..')
