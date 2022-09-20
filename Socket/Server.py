@@ -11,20 +11,54 @@ import socket
 
 
 
-class Server():
+class pScoket():
     def __init__(self, ip, port):
-       print(f'server init..\n')
+       print(f'socket init..\n')
        self.ip = ip
        self.port = port 
     
-    # create IPv4, tcp socket 
-    def tcp_socket(self):
+    
+    ###################################################
+    # client
+    ###################################################
+    
+    # create IPv4, tcp client socket 
+    def tcp_client_socket(self):
         
-        # create socket
+        # create client socket
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        print(f'create IPv4 tcp client socket\n')
+        
+        # connect
+        self.sock.connect((self.ip, self.port))
+        print(f'connnect : {self.ip}, {self.port}')
+
+        return self.sock
+    
+    
+    # create IPv4, udp socket 
+    def udp_client_socket(self):
+        pass
+
+    
+    # close client socket
+    def tcp_client_close(self):
+        self.sock.close()
+
+
+
+    ###################################################
+    # server
+    ###################################################
+    
+    # create IPv4, tcp server socket 
+    def tcp_server_socket(self):
+        
+        # create server socket
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         print(f'create IPv4 tcp server socket\n')
         
-        # set socket 
+        # set server socket 
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)    #### --> to study..
         
         # bind
@@ -43,11 +77,11 @@ class Server():
     
     
     # create IPv4, udp socket 
-    def udp_socket(self):
+    def udp_server_socket(self):
         pass
 
     
-    # close socket
+    # close server socket
     def close_socket(self):
         self.client_socket.close()
         self.sock.close()
@@ -60,14 +94,17 @@ port = 9999
 
 if __name__ == '__main__':
     
-    server = Server(ip, port)
+    server = pScoket(ip, port)
     
     # tcp socket
-    client_sock, addr = server.tcp_socket()
+    client_sock, addr = server.tcp_server_socket()
     
+    
+    # data send & recv 부분 update 필요...
     while True:
         data = client_sock.recv(1024)
-
+        if not data:
+            break
         print('receive data ', addr, data.decode())
     
     
