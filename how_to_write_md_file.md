@@ -1,5 +1,5 @@
 # How to write .md file
-- https://www.markdownguide.or
+- https://www.markdownguide.org
 
 ### 1. 제목
 - '#' 을 사용하여 제목을 표시
